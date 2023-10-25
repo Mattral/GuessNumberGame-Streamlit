@@ -15,24 +15,23 @@ secret_number = random.randint(1, 100)
 attempts = 0
 feedback = ""
 
-while True:
-    # Input field for the user's guess
-    user_guess = st.number_input("Enter your guess:", min_value=1, max_value=100, key="guess")
+form = st.form(key='my_form')
+user_guess = form.number_input("Enter your guess:", min_value=1, max_value=100)
+submitted = form.form_submit_button("Check")
 
-    if st.button("Check"):
-        attempts += 1
-        if user_guess < secret_number:
-            feedback = "Try a higher number."
-        elif user_guess > secret_number:
-            feedback = "Try a lower number."
-        else:
-            feedback = f"Congratulations! You guessed the number {secret_number} in {attempts} attempts."
-            secret_number = random.randint(1, 100)  # Reset the secret number
-            attempts = 0
-            break
+if submitted:
+    attempts += 1
+    if user_guess < secret_number:
+        feedback = "Try a higher number."
+    elif user_guess > secret_number:
+        feedback = "Try a lower number."
+    else:
+        feedback = f"Congratulations! You guessed the number {secret_number} in {attempts} attempts."
+        secret_number = random.randint(1, 100)  # Reset the secret number
+        attempts = 0
 
-    # Display feedback
-    st.write(feedback)
+# Display feedback
+st.write(feedback)
 
 # Display attempts
 st.write(f"Attempts: {attempts}")
