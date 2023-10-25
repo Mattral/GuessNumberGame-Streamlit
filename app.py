@@ -1,9 +1,6 @@
 import streamlit as st
 import random
 
-# Generate a random secret number when the game starts
-secret_number = random.randint(1, 100)
-
 # Set a dark theme for the Streamlit app
 st.markdown(
     """
@@ -35,20 +32,21 @@ st.title("Guess the Number Game")
 
 st.markdown("I'm thinking of a number between 1 and 100. Can you guess what it is?", unsafe_allow_html=True)
 
+# Generate a random secret number when the game starts
+secret_number = random.randint(1, 100)
+
 attempts = 0
 
-# Main game loop
 while True:
-    user_guess = st.number_input("Enter your guess:", min_value=1, max_value=100, key="guess")
-    
-    attempts += 1
-    
-    if user_guess == secret_number:
-        st.markdown(f"Congratulations! You guessed the correct number {secret_number} in {attempts} attempts.", unsafe_allow_html=True)
-        break
-    elif user_guess < secret_number:
-        st.markdown("Try a higher number.", unsafe_allow_html=True)
-    else:
-        st.markdown("Try a lower number.", unsafe_allow_html=True)
+    user_guess = st.number_input(f"Enter your guess ({attempts} attempts):", min_value=1, max_value=100, key=f"guess_{attempts}")
 
-st.markdown("Thanks for playing!", unsafe_allow_html=True)
+    if st.button("Guess"):
+        attempts += 1
+
+        if user_guess == secret_number:
+            st.markdown(f"Congratulations! You guessed the correct number {secret_number} in {attempts} attempts.", unsafe_allow_html=True)
+            break  # End the game when the correct number is guessed
+        elif user_guess < secret_number:
+            st.markdown("Try a higher number.", unsafe_allow_html=True)
+        else:
+            st.markdown("Try a lower number.", unsafe_allow_html=True)
