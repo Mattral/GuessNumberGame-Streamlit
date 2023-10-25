@@ -17,7 +17,7 @@ feedback = ""
 
 while True:
     # Input field for the user's guess
-    user_guess = st.number_input("Enter your guess:", min_value=1, max_value=100)
+    user_guess = st.number_input("Enter your guess:", min_value=1, max_value=100, key="guess")
 
     if st.button("Check"):
         attempts += 1
