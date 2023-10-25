@@ -38,7 +38,7 @@ secret_number = random.randint(1, 100)
 attempts = 0
 
 while True:
-    user_guess = st.number_input(f"Enter your guess ({attempts} attempts):", min_value=1, max_value=100, key="guess")
+    user_guess = st.number_input(f"Enter your guess ({attempts} attempts):", min_value=1, max_value=100, key=f"guess_{attempts}")
 
     if st.button("Guess"):
         attempts += 1
