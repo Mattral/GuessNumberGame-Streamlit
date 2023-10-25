@@ -37,14 +37,16 @@ secret_number = random.randint(1, 100)
 
 attempts = 0
 
-user_guess = st.number_input(f"Enter your guess ({attempts} attempts):", min_value=1, max_value=100)
+while True:
+    user_guess = st.number_input(f"Enter your guess ({attempts} attempts):", min_value=1, max_value=100, key="guess")
 
-if st.button("Guess"):
-    attempts += 1
+    if st.button("Guess"):
+        attempts += 1
 
-    if user_guess == secret_number:
-        st.markdown(f"Congratulations! You guessed the correct number {secret_number} in {attempts} attempts.", unsafe_allow_html=True)
-    elif user_guess < secret_number:
-        st.markdown("Try a higher number.", unsafe_allow_html=True)
-    else:
-        st.markdown("Try a lower number.", unsafe_allow_html=True)
+        if user_guess == secret_number:
+            st.markdown(f"Congratulations! You guessed the correct number {secret_number} in {attempts} attempts.", unsafe_allow_html=True)
+            break  # End the game when the correct number is guessed
+        elif user_guess < secret_number:
+            st.markdown("Try a higher number.", unsafe_allow_html=True)
+        else:
+            st.markdown("Try a lower number.", unsafe_allow_html=True)
