@@ -39,7 +39,7 @@ attempts = 0
 
 # Main game loop
 while True:
-    user_guess = st.number_input("Enter your guess:", min_value=1, max_value=100, key="guess")
+    user_guess = st.number_input(f"Enter your guess ({attempts + 1} attempts):", min_value=1, max_value=100, key=f"guess_{attempts}")
     
     attempts += 1
     
